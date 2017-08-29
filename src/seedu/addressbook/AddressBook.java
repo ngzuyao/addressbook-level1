@@ -325,6 +325,15 @@ public class AddressBook {
     }
 
     /**
+     * Returns true if the name exists in address book.
+     */
+    private static boolean hasNameInBook(String name) {
+        final Set<String> keywords = extractKeywordsFromFindPersonArgs(name);
+        final ArrayList<String[]> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
+        return personsFound.size() > 0;
+    }
+
+    /**
      * Returns true if the file path has a parent directory that exists.
      */
     private static boolean hasValidParentDirectory(Path filePath) {

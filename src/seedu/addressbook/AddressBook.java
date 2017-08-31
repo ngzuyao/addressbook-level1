@@ -129,6 +129,10 @@ public class AddressBook {
     private static final String COMMAND_HELP_DESC = "Shows program usage instructions.";
     private static final String COMMAND_HELP_EXAMPLE = COMMAND_HELP_WORD;
 
+    private static final String COMMAND_HAS_WORD = "has";
+    private static final String COMMAND_HAS_DESC = "Checks whether name is in address book.";
+    private static final String COMMAND_HAS_EXAMPLE = COMMAND_HAS_WORD;
+
     private static final String COMMAND_EXIT_WORD = "exit";
     private static final String COMMAND_EXIT_DESC = "Exits the program.";
     private static final String COMMAND_EXIT_EXAMPLE = COMMAND_EXIT_WORD;
@@ -388,7 +392,9 @@ public class AddressBook {
             return executeDeletePerson(commandArgs);
         case COMMAND_CLEAR_WORD:
             return executeClearAddressBook();
-        case COMMAND_HELP_WORD:
+            case COMMAND_HAS_WORD:
+                return executeHasNameInBook();
+            case COMMAND_HELP_WORD:
             return getUsageInfoForAllCommands();
         case COMMAND_EXIT_WORD:
             executeExitProgramRequest();
@@ -415,6 +421,10 @@ public class AddressBook {
      */
     private static String getMessageForInvalidCommandInput(String userCommand, String correctUsageInfo) {
         return String.format(MESSAGE_INVALID_COMMAND_FORMAT, userCommand, correctUsageInfo);
+    }
+
+    private static Boolean executeHasNameInBook(String commandArgs) {
+        return hasNameInBook(commandArgs);
     }
 
     /**

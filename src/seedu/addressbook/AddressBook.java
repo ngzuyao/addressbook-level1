@@ -133,7 +133,7 @@ public class AddressBook {
 
     private static final String COMMAND_HAS_WORD = "has";
     private static final String COMMAND_HAS_DESC = "Checks whether name is in address book.";
-    private static final String COMMAND_HAS_EXAMPLE = COMMAND_HAS_WORD;
+    private static final String COMMAND_HAS_EXAMPLE = COMMAND_HAS_WORD + " charlie";
 
     private static final String COMMAND_EXIT_WORD = "exit";
     private static final String COMMAND_EXIT_DESC = "Exits the program.";
@@ -1135,6 +1135,7 @@ public class AddressBook {
                 + getUsageInfoForViewCommand() + LS
                 + getUsageInfoForDeleteCommand() + LS
                 + getUsageInfoForClearCommand() + LS
+                + getUsageInfoForHasCommand() + LS
                 + getUsageInfoForExitCommand() + LS
                 + getUsageInfoForHelpCommand();
     }
@@ -1182,6 +1183,12 @@ public class AddressBook {
     private static String getUsageInfoForExitCommand() {
         return String.format(MESSAGE_COMMAND_HELP, COMMAND_EXIT_WORD, COMMAND_EXIT_DESC)
                 + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_EXIT_EXAMPLE);
+    }
+
+    /** Returns string for showing 'has' command usage instruction */
+    private static String getUsageInfoForHasCommand() {
+        return String.format(MESSAGE_COMMAND_HELP, COMMAND_HAS_WORD, COMMAND_HAS_DESC) + LS
+                + String.format(MESSAGE_COMMAND_HELP_EXAMPLE, COMMAND_HAS_EXAMPLE) + LS;
     }
 
 

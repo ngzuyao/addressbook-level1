@@ -90,7 +90,8 @@ public class AddressBook {
     private static final String MESSAGE_STORAGE_FILE_CREATED = "Created new empty storage file: %1$s";
     private static final String MESSAGE_WELCOME = "Welcome to your Address Book!";
     private static final String MESSAGE_USING_DEFAULT_FILE = "Using default storage file : " + DEFAULT_STORAGE_FILEPATH;
-    private static final String MESSAGE_HAS_NAME_IN_BOOK = "Name %1s is is this Address Book";
+    private static final String MESSAGE_HAS_NAME_IN_BOOK = "Name %1s is in this Address Book";
+    private static final String MESSAGE_HAS_NO_NAME_IN_BOOK = "Name %1s is not in this Address Book";
 
     // These are the prefix strings to define the data type of a command parameter
     private static final String PERSON_DATA_PREFIX_PHONE = "p/";
@@ -394,7 +395,7 @@ public class AddressBook {
         case COMMAND_CLEAR_WORD:
             return executeClearAddressBook();
         case COMMAND_HAS_WORD:
-            return executeHasNameInBook();
+            return executeHasNameInBook(commandArgs);
         case COMMAND_HELP_WORD:
             return getUsageInfoForAllCommands();
         case COMMAND_EXIT_WORD:
@@ -424,8 +425,35 @@ public class AddressBook {
         return String.format(MESSAGE_INVALID_COMMAND_FORMAT, userCommand, correctUsageInfo);
     }
 
-    private static Boolean executeHasNameInBook(String commandArgs) {
-        return hasNameInBook(commandArgs);
+    /**
+     * Informs whether there is this name in the Address Book.
+     * @param name
+     * @return
+     */
+    private static String executeHasNameInBook(String name) {
+
+        if (!hasNameInBook(name)) {
+            return getMessageForFailedSearch(name);
+        }
+        return getMessageForSuccessfulSearch(name);
+    }
+
+    /**
+     * Constructs a feedback message for a successful search name command execution.
+     * @return
+     */
+    private static String getMessageForSuccessfulSearch(String name) {
+        return String.format(MESSAGE_HAS_NAME_IN_BOOK,
+                name);
+    }
+
+    /**
+     * Constructs a feedback message for a failed search name command execution.
+     * @return
+     */
+    private static String getMessageForFailedSearch(String name) {
+        return String.format(MESSAGE_HAS_NO_NAME_IN_BOOK,
+                name);
     }
 
     /**
